@@ -1,0 +1,89 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\fnil\fcharset0 HelveticaNeue-Italic;}
+{\colortbl;\red255\green255\blue255;\red46\green45\blue42;\red255\green255\blue255;\red162\green70\blue22;
+}
+{\*\expandedcolortbl;;\cssrgb\c23529\c23137\c21569;\cssrgb\c100000\c100000\c100000;\cssrgb\c70196\c35294\c10588;
+}
+{\info
+{\author Elisabeth Robson}}\margl1440\margr1440\vieww19520\viewh25200\viewkind0
+\deftab720
+\pard\pardeftab720\sl920\partightenfactor0
+
+\f0\fs72 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Overheard on the forum\
+\pard\pardeftab720\partightenfactor0
+
+\fs36 \cf2 \cb1 \
+\cb3 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {{\NeXTGraphic Pasted Graphic.jpg \width720 \height720 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 {{\NeXTGraphic Pasted Graphic 1.jpg \width720 \height720 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs36 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \
+\pard\pardeftab720\sa400\partightenfactor0
+\cf2 \
+AJ: What do you think that error means, "Uncaught TypeError: Cannot read property 'push' of undefined"?\cb1 \
+\cb3 Bill: It looks like the error's happening in the\'a0
+\f2 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0function, where we're trying to push the click info object onto the end of the\'a0
+\f2 \cf4 \strokec4 clicks
+\f0 \cf2 \strokec2 \'a0array. I think that means the\'a0
+\f2 \cf4 \strokec4 clicks
+\f0 \cf2 \strokec2 \'a0array is undefined.\cb1 \
+\cb3 AJ: If the\'a0
+\f2 \cf4 \strokec4 clicks
+\f0 \cf2 \strokec2 \'a0array isn't defined that means the View isn't being created correctly, right?\cb1 \
+\cb3 Bill: Could be that, or it could be that\'a0
+\f2 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0isn't the correct object in the View. I've had trouble with\'a0
+\f2 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0before; sometimes it doesn't get set to the object you think it's going to be set to.\cb1 \
+\cb3 AJ: Let's test it and see. I've added a\'a0
+\f2 \cf4 \strokec4 console.log
+\f0 \cf2 \strokec2 \'a0to the function to see what\'a0
+\f2 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0is inside the\'a0
+\f2 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0function...\cb1 \
+\cb3 Bill: And?\cb1 \
+\cb3 AJ: It looks like\'a0
+\f2 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0is the\'a0
+\f2 \cf4 \strokec4 canvas
+\f0 \cf2 \strokec2 \'a0object instead of the\'a0
+\f2 \cf4 \strokec4 view
+\f0 \cf2 \strokec2 \'a0object.\cb1 \
+\cb3 Bill: Why is\'a0
+\f2 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0set to the\'a0
+\f2 \cf4 \strokec4 canvas
+\f0 \cf2 \strokec2 \'a0object? Isn't\'a0
+\f2 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0always set to the object whose method you call? We're calling\'a0
+\f2 \cf4 \strokec4 view.handleClick
+\f0 \cf2 \strokec2 \'a0in the\'a0
+\f2 \cf4 \strokec4 addEventListener
+\f0 \cf2 \strokec2 \'a0call, so\'a0
+\f2 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0should be set to\'a0
+\f2 \cf4 \strokec4 view
+\f0 \cf2 \strokec2 , right?\cb1 \
+\cb3 AJ: Take another look. We're not actually\'a0
+\f3\i calling
+\f0\i0 \'a0the\'a0
+\f2 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0method; we're passing it to\'a0
+\f2 \cf4 \strokec4 addEventListener
+\f0 \cf2 \strokec2 \'a0as the handler for the click event.\cb1 \
+\cb3 Bill: Hmmm. There must be something about the way we're passing the method that's messing up the value of\'a0
+\f2 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0in the\'a0
+\f2 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0function.\cb1 \
+\cb3 AJ: Yes, I think so. We need to look at this a bit more deeply to figure it out...\cb1 \
+}

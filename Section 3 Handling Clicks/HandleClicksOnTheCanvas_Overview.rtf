@@ -1,0 +1,46 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red46\green45\blue42;\red255\green255\blue255;\red162\green70\blue22;
+}
+{\*\expandedcolortbl;;\cssrgb\c23529\c23137\c21569;\cssrgb\c100000\c100000\c100000;\cssrgb\c70196\c35294\c10588;
+}
+{\info
+{\author Elisabeth Robson}}\margl1440\margr1440\vieww19520\viewh25200\viewkind0
+\deftab720
+\pard\pardeftab720\sl920\partightenfactor0
+
+\f0\fs72 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Handle clicks on the canvas: Overview\
+\pard\pardeftab720\sa400\partightenfactor0
+
+\fs36 \cf2 You know how to draw a circle on the canvas; now we need to figure out how to draw a circle each time you click on the canvas, and at the location on the canvas where you click.\cb1 \
+\cb3 For this section, we'll modify both the View in "View.js", as well as the code in "musicbox.js". First, in "musicbox.js", we're going to add a click handler to the canvas. Adding a click handler to a canvas is just like adding a click handler to any other DOM element. We'll use the\'a0
+\f1 \cf4 \strokec4 addEventListener
+\f0 \cf2 \strokec2 \'a0method to add the click handler to the canvas, and we'll define the click handler function,\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 , in the view.\cb1 \
+\cb3 The\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0function is responsible for adding a circle to the view whenever you click on the canvas. But we can't just call\'a0
+\f1 \cf4 \strokec4 drawCircle
+\f0 \cf2 \strokec2 \'a0to add a circle, because we want to animate the circles over and over again, as you saw in the preview video of the project. So instead,\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0is going to create a simple object representing a circle, containing the x and y coordinates on the click in the canvas (so we know where to add the circle). Each circle that gets added to the View will be stored in an array,\'a0
+\f1 \cf4 \strokec4 clicks
+\f0 \cf2 \strokec2 \'a0so we can keep track of all the circles.\cb1 \
+\cb3 Instead of having\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0call\'a0
+\f1 \cf4 \strokec4 drawCircle
+\f0 \cf2 \strokec2 \'a0to draw the circles in the clicks array, we're going to use\'a0
+\f1 \cf4 \strokec4 updateDisplay
+\f0 \cf2 \strokec2 \'a0to do that. Right now, we're calling\'a0
+\f1 \cf4 \strokec4 drawCircle
+\f0 \cf2 \strokec2 \'a0from\'a0
+\f1 \cf4 \strokec4 updateDisplay
+\f0 \cf2 \strokec2 \'a0once, to draw one test circle. We'll change that code so that\'a0
+\f1 \cf4 \strokec4 updateDisplay
+\f0 \cf2 \strokec2 \'a0will iterate through the clicks array to draw each circle stored in the array. We'll get to that in a little bit; for now, let's get the click handler working and make sure we store each new circle in the\'a0
+\f1 \cf4 \strokec4 clicks
+\f0 \cf2 \strokec2 \'a0array.\cb1 \
+}

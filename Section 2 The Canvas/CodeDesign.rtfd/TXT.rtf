@@ -1,0 +1,42 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\fnil\fcharset0 HelveticaNeue-Italic;}
+{\colortbl;\red255\green255\blue255;\red46\green45\blue42;\red255\green255\blue255;\red162\green70\blue22;
+}
+{\*\expandedcolortbl;;\cssrgb\c23529\c23137\c21569;\cssrgb\c100000\c100000\c100000;\cssrgb\c70196\c35294\c10588;
+}
+{\info
+{\author Elisabeth Robson}}\margl1440\margr1440\vieww19520\viewh25200\viewkind0
+\deftab720
+\pard\pardeftab720\sl920\partightenfactor0
+
+\f0\fs72 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Code design\
+\pard\pardeftab720\sa400\partightenfactor0
+
+\fs36 \cf2 It's time to write some code. To begin, we're going to get the canvas into place and make sure we can do a very simple drawing to the canvas. Don't worry, if you haven't worked with the canvas before we'll do a quick review of the basics.\cb1 \
+\cb3 You already know that this application has several different components: we need a canvas, which is going to act as our interface for users to add circles and sounds; we need to draw on the canvas to create the circles; we need to load and play sounds; and we need a way to coordinate everything.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {{\NeXTGraphic Pasted Graphic.jpg \width8000 \height2980 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}
+\f0\fs36 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \
+\pard\pardeftab720\sa400\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs40 \cf2 \
+\pard\pardeftab720\sa400\partightenfactor0
+
+\fs36 \cf2 \cb3 As we described in the Game Plan lesson, we're going to organize our code by splitting it up into several different files. Each file is going to contain the code associated with one responsibility of the application. The code that kicks everything off once the page is loaded is the code in the\'a0
+\f2 \cf4 \strokec4 window.onload
+\f0 \cf2 \strokec2 \'a0function, and we're going to put that in a file named "musicbox.js". Then, we'll put the code for the other responsibilities: managing and drawing in the canvas, loading sounds, and playing sounds, into separate files. When we organize code this way, we say we're\'a0
+\f3\i separating the concerns
+\f0\i0 \'a0of each part of the code so each piece stays relatively small and focused.\cb1 \
+\cb3 In this module, we're going to start putting this structure into place by creating two pieces: the "musicbox.js" file containing the\'a0
+\f2 \cf4 \strokec4 window.onload
+\f0 \cf2 \strokec2 \'a0function to get the application going, and the "View.js" file containing the code to manage and draw in the canvas.\cb1 \
+\cb3 We won't do the complete code for these pieces just yet; we're just getting started, and we're going to take it a step at a time. The goal here is to introduce the canvas so you can learn how we can use a canvas element and JavaScript code to create an interface for the application.\cb1 \
+\cb3 So let's get started!\cb1 \
+}

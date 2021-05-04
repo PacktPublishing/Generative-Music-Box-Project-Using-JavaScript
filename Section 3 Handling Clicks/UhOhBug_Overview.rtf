@@ -1,0 +1,138 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 HelveticaNeue-Italic;
+}
+{\colortbl;\red255\green255\blue255;\red46\green45\blue42;\red255\green255\blue255;\red162\green70\blue22;
+\red13\green100\blue126;}
+{\*\expandedcolortbl;;\cssrgb\c23529\c23137\c21569;\cssrgb\c100000\c100000\c100000;\cssrgb\c70196\c35294\c10588;
+\cssrgb\c0\c46667\c56863;}
+{\info
+{\author Elisabeth Robson}}\margl1440\margr1440\vieww19520\viewh25200\viewkind0
+\deftab720
+\pard\pardeftab720\sl920\partightenfactor0
+
+\f0\fs72 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Uh oh, a bug!: Overview\
+\pard\pardeftab720\sa400\partightenfactor0
+
+\fs36 \cf2 We've got a problem with this line of code:\cb1 \
+\pard\pardeftab720\sa400\partightenfactor0
+
+\f1 \cf4 \cb3 \strokec4 var pos = view.clicks.push(\{x: x, y: y, radius: 100\});
+\f0 \cf2 \cb1 \strokec2 \
+\pard\pardeftab720\sa400\partightenfactor0
+\cf2 \cb3 To see the problem with the\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0function, try adding a\'a0
+\f1 \cf4 \strokec4 console.log
+\f0 \cf2 \strokec2 \'a0statement at the top of the function, like this:\cb1 \
+\pard\pardeftab720\sa400\partightenfactor0
+
+\f1 \cf4 \cb3 \strokec4 console.log(this);
+\f0 \cf2 \cb1 \strokec2 \
+\pard\pardeftab720\sa400\partightenfactor0
+\cf2 \cb3 When you look in the console, you should see that\'a0
+\f1 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0is the canvas object:\cb1 \
+\pard\pardeftab720\sa400\partightenfactor0
+
+\f1 \cf4 \cb3 \strokec4 <canvas id="canvas" width="1000" height="600">
+\f0 \cf2 \cb1 \strokec2 \
+\pard\pardeftab720\sa400\partightenfactor0
+\cf2 \cb3 But why? If you look at where we're setting up\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0as the click handler for the canvas (in "musicbox.js"):\cb1 \
+\pard\pardeftab720\sa400\partightenfactor0
+
+\f1 \cf4 \cb3 \strokec4 canvas.addEventListener("click", view.handleClick, false);
+\f0 \cf2 \cb1 \strokec2 \
+\pard\pardeftab720\sa400\partightenfactor0
+\cf2 \cb3 you can see that we're passing\'a0
+\f1 \cf4 \strokec4 view.handleClick
+\f0 \cf2 \strokec2 \'a0as the handler function.\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0is a method of the\'a0
+\f1 \cf4 \strokec4 view
+\f0 \cf2 \strokec2 \'a0object, so why isn't\'a0
+\f1 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0set to\'a0
+\f1 \cf4 \strokec4 view
+\f0 \cf2 \strokec2 ?\cb1 \
+\cb3 Well, take a closer look. Normally, when you call a method of an object,\'a0
+\f1 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0is set to the object whose method you're calling in the body of the method. But we're not actually\'a0
+\f2\i calling
+\f0\i0 \'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 . Instead, we're passing a\'a0
+\f2\i reference
+\f0\i0 \'a0to the function\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0so that\'a0
+\f1 \cf4 \strokec4 addEventListener
+\f0 \cf2 \strokec2 \'a0can call it later, when you click on the canvas. When\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0gets called, it is getting called as a method of the\'a0
+\f1 \cf4 \strokec4 canvas
+\f0 \cf2 \strokec2 \'a0object,\'a0
+\f2\i not
+\f0\i0 \'a0as a method of the\'a0
+\f1 \cf4 \strokec4 view
+\f0 \cf2 \strokec2 \'a0object. It's a method of the\'a0
+\f1 \cf4 \strokec4 canvas
+\f0 \cf2 \strokec2 \'a0object, because we're assigning the function to the\'a0
+\f1 \cf4 \strokec4 click
+\f0 \cf2 \strokec2 \'a0property of the\'a0
+\f1 \cf4 \strokec4 canvas
+\f0 \cf2 \strokec2 \'a0object in the line where we call\'a0
+\f1 \cf4 \strokec4 canvas.addEventListener
+\f0 \cf2 \strokec2 . That means that\'a0
+\f1 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 , in\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 , ends up getting set to the\'a0
+\f1 \cf4 \strokec4 canvas
+\f0 \cf2 \strokec2 \'a0object instead of the\'a0
+\f1 \cf4 \strokec4 view
+\f0 \cf2 \strokec2 \'a0object.\cb1 \
+\cb3 If you need a more in-depth explanation of why\'a0
+\f1 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0isn't getting set to the correct object, take a look at this free\'a0{\field{\*\fldinst{HYPERLINK "http://wickedlysmart.com/hfjsextras/HFJS_Extra_Timer.pdf"}}{\fldrslt \cf5 \strokec5 Head First JavaScript Programming Extra}}\'a0about this very issue. This is a common mistake to make, and if you're not very careful about tracking why and how\'a0
+\f1 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0is set in a method call, it's easy to lose track of what the value of\'a0
+\f1 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0will be.\cb1 \
+\cb3 Fortunately, our problem has an easy fix. We can force\'a0
+\f1 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0to be the value we want it to be in the\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0function by using\'a0
+\f1 \cf4 \strokec4 bind
+\f0 \cf2 \strokec2 . We use\'a0
+\f1 \cf4 \strokec4 bind
+\f0 \cf2 \strokec2 \'a0like this:\cb1 \
+\pard\pardeftab720\sa400\partightenfactor0
+
+\f1 \cf4 \cb3 \strokec4 view.handleClick.bind(view);
+\f0 \cf2 \cb1 \strokec2 \
+\pard\pardeftab720\sa400\partightenfactor0
+\cf2 \cb3 Calling\'a0
+\f1 \cf4 \strokec4 bind
+\f0 \cf2 \strokec2 \'a0returns a new function reference to the function\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 , only with\'a0
+\f1 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0bound to the\'a0
+\f1 \cf4 \strokec4 view
+\f0 \cf2 \strokec2 \'a0object. If we pass this modified function reference to\'a0
+\f1 \cf4 \strokec4 addEventListener
+\f0 \cf2 \strokec2 ,\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0will be called when you click on the canvas, and\'a0
+\f1 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0will be properly set to the\'a0
+\f1 \cf4 \strokec4 view
+\f0 \cf2 \strokec2 \'a0object instead of the\'a0
+\f1 \cf4 \strokec4 canvas
+\f0 \cf2 \strokec2 \'a0object.\cb1 \
+\cb3 We'll fix the code in the next lesson.\cb1 \
+}

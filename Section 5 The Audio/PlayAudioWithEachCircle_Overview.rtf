@@ -1,0 +1,53 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red46\green45\blue42;\red255\green255\blue255;\red162\green70\blue22;
+\red13\green100\blue126;\red245\green246\blue249;}
+{\*\expandedcolortbl;;\cssrgb\c23529\c23137\c21569;\cssrgb\c100000\c100000\c100000;\cssrgb\c70196\c35294\c10588;
+\cssrgb\c0\c46667\c56863;\cssrgb\c96863\c97255\c98039;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{none\}}{\leveltext\leveltemplateid1\'00;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+{\info
+{\author Elisabeth Robson}}\margl1440\margr1440\vieww19520\viewh25200\viewkind0
+\deftab720
+\pard\pardeftab720\sl920\partightenfactor0
+
+\f0\fs72 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Play audio with each circle: Overview\
+\pard\pardeftab720\sa400\partightenfactor0
+
+\fs36 \cf2 This is the last step before we test the finished application. We're almost there!\cb1 \
+\cb3 We just added code to include the capability to play an audio sample, so now, we're ready to update the code in the View to do just that. All we need to do is call\'a0
+\f1 \cf4 \strokec4 Audio.play
+\f0 \cf2 \strokec2 \'a0and pass in an index into the\'a0
+\f1 \cf4 \strokec4 bufferList
+\f0 \cf2 \strokec2 \'a0array, which contains our list of audio samples.\cb1 \
+\cb3 Take a look at the\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0function in the View ("View.js"). Remember that this is where we add a new circle to the music box, and create a timer for each new circle that resets that circle's radius to 0 every four seconds so that the circle will continue to animate over and over again. Our goal is to play a sound that begins to play roughly in synch with when a circle begins to animate; that is, when the circle's radius is 0. And of course, we want that sound to repeat each time the circle starts animating again.\cb1 \
+\cb3 We can do this by calling\'a0
+\f1 \cf4 \strokec4 Audio.play
+\f0 \cf2 \strokec2 \'a0in\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 , just before we call\'a0
+\f1 \cf4 \strokec4 setInterval
+\f0 \cf2 \strokec2 . This will play a sound when a circle is first added. Then, we'll also add a call to\'a0
+\f1 \cf4 \strokec4 Audio.play
+\f0 \cf2 \strokec2 \'a0in the anonymous function we're passing to\'a0
+\f1 \cf4 \strokec4 setInterval
+\f0 \cf2 \strokec2 , so that the sound repeats each time the circle's animation begins.\cb1 \
+\cb3 But which sound do we want to play for a given circle? Well, we know we have ten different samples, so that means the number we pass to\'a0
+\f1 \cf4 \strokec4 Audio.play
+\f0 \cf2 \strokec2 \'a0should be between 0 and 9. We could randomly choose a number in this range, but we can do better by basing the audio sample we select on the location of the circle on the canvas. You could pick x or y or some combination of the two for this; we're going to keep it simple and use x. To get a number between 0 and 9 based on the x location of the circle, we'll use x % 10, which is x "modulus" 10: divide x by 10 and take the remainder. This number is a number between 0 and 9.\cb1 \
+\cb3 Now you know what we're going to do, and why we're doing it, so it's time to add the code to the\'a0
+\f1 \cf4 \strokec4 handleClick
+\f0 \cf2 \strokec2 \'a0function in your "View.js" file.\'a0{\field{\*\fldinst{HYPERLINK "https://gist.github.com/bethrobson/601f2d45c8c533a6aa40"}}{\fldrslt \cf5 \strokec5 Get the code from GitHub}}.\cb1 \
+\cb3 Watch the video in the next lesson, add your code, and get ready for the final test!\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs48 \cf2 \cb3 Resources for this lecture\cb1 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0
+\fs40 \cf5 \cb6 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		{\field{\*\fldinst{HYPERLINK "javascript:void(0)"}}{\fldrslt \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Updates to the View code at GitHub}}\cf2 \cb1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \
+}

@@ -1,0 +1,83 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red46\green45\blue42;\red255\green255\blue255;\red162\green70\blue22;
+\red13\green100\blue126;\red245\green246\blue249;}
+{\*\expandedcolortbl;;\cssrgb\c23529\c23137\c21569;\cssrgb\c100000\c100000\c100000;\cssrgb\c70196\c35294\c10588;
+\cssrgb\c0\c46667\c56863;\cssrgb\c96863\c97255\c98039;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{none\}}{\leveltext\leveltemplateid1\'00;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+{\info
+{\author Elisabeth Robson}}\margl1440\margr1440\vieww19520\viewh25200\viewkind0
+\deftab720
+\pard\pardeftab720\sl920\partightenfactor0
+
+\f0\fs72 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Draw the circles on the canvas: Overview\
+\pard\pardeftab720\sa400\partightenfactor0
+
+\fs36 \cf2 Watch the video above, and follow along as we add the code to draw circles to the canvas whenever we click to add a new circle.\cb1 \
+\cb3 The first step is to draw all the circles stored in the\'a0
+\f1 \cf4 \strokec4 clicks
+\f0 \cf2 \strokec2 \'a0array. We'll do this in\'a0
+\f1 \cf4 \strokec4 updateDisplay
+\f0 \cf2 \strokec2 . Remember that\'a0
+\f1 \cf4 \strokec4 updateDisplay
+\f0 \cf2 \strokec2 \'a0is clearing out the canvas, by drawing a black background over the whole canvas. So any circles that are currently drawn in the canvas will disappear. So we'll iterate through the\'a0
+\f1 \cf4 \strokec4 clicks
+\f0 \cf2 \strokec2 \'a0array, drawing all the circles stored there. If any new circles have been added since the last time we called\'a0
+\f1 \cf4 \strokec4 updateDisplay
+\f0 \cf2 \strokec2 , they'll get drawn too.\cb1 \
+\cb3 We get each circle from the\'a0
+\f1 \cf4 \strokec4 clicks
+\f0 \cf2 \strokec2 \'a0array, and call\'a0
+\f1 \cf4 \strokec4 drawCircle
+\f0 \cf2 \strokec2 \'a0with that circle's x, y coordinates, and the radius of the circle. Right now the radius is set to 100, but we're going to change that later so the radius varies over time. Also notice that alpha is set to 1; again we're going to change that later so it varies depending on the radius of the circle.\cb1 \
+\pard\pardeftab720\sa400\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://gist.github.com/bethrobson/e18697209adde7291418"}}{\fldrslt \cf5 \cb3 \strokec5 Get the updates to the View code on GitHub}}\cb3 .\cb1 \
+\pard\pardeftab720\sa400\partightenfactor0
+\cf2 \cb3 We've also added a\'a0
+\f1 \cf4 \strokec4 frameRate
+\f0 \cf2 \strokec2 \'a0property to the view, in the constructor function. The frame rate is how often we're going to call\'a0
+\f1 \cf4 \strokec4 updateDisplay
+\f0 \cf2 \strokec2 . Remember the movie analogy? This is how many frames per second we're showing the user: 1000/30, or about 33 frames per second.\cb1 \
+\cb3 To make this work, we have to change how we're calling\'a0
+\f1 \cf4 \strokec4 updateDisplay
+\f0 \cf2 \strokec2 . Instead of just calling the function once from the window.onload function, we're going to call it over and over again at a specific rate, defined by\'a0
+\f1 \cf4 \strokec4 frameRate
+\f0 \cf2 \strokec2 . We'll do that with\'a0
+\f1 \cf4 \strokec4 setInterval
+\f0 \cf2 \strokec2 .\cb1 \
+\pard\pardeftab720\sa400\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://gist.github.com/bethrobson/019f8a0245a647118340"}}{\fldrslt \cf5 \cb3 \strokec5 Get the updates to musicbox.js on GitHub}}\cb3 .\cb1 \
+\pard\pardeftab720\sa400\partightenfactor0
+
+\f1 \cf4 \cb3 \strokec4 setInterval
+\f0 \cf2 \strokec2 \'a0calls a function over and over again, at the rate you determine. Notice that we have to use the same trick we used before with\'a0
+\f1 \cf4 \strokec4 bind
+\f0 \cf2 \strokec2 \'a0to make sure that\'a0
+\f1 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0in the body of\'a0
+\f1 \cf4 \strokec4 updateDisplay
+\f0 \cf2 \strokec2 \'a0is set to the\'a0
+\f1 \cf4 \strokec4 view
+\f0 \cf2 \strokec2 \'a0object. If we don't use\'a0
+\f1 \cf4 \strokec4 bind
+\f0 \cf2 \strokec2 , in this case,\'a0
+\f1 \cf4 \strokec4 this
+\f0 \cf2 \strokec2 \'a0would be set to the\'a0
+\f1 \cf4 \strokec4 window
+\f0 \cf2 \strokec2 \'a0object, which isn't what we want.\cb1 \
+\pard\pardeftab720\sa400\partightenfactor0
+\cf2 \cb3 Now get your code updated and let's test this code! If everything's working well, you should see a circle appear in the canvas every time you click.\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs48 \cf2 \cb3 Resources for this lecture\cb1 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0
+\fs40 \cf5 \cb6 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		{\field{\*\fldinst{HYPERLINK "javascript:void(0)"}}{\fldrslt \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Updates to View code on GitHub}}\cf2 \cb1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \
+\ls1\ilvl0\cf5 \cb6 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		{\field{\*\fldinst{HYPERLINK "javascript:void(0)"}}{\fldrslt \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Updates to musicbox.js on GitHub}}\cf2 \cb1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \
+}

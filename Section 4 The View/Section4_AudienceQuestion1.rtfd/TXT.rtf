@@ -1,0 +1,40 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fnil\fcharset0 HelveticaNeue-Bold;\f2\fswiss\fcharset0 Helvetica;
+\f3\fnil\fcharset0 Menlo-Bold;\f4\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red46\green45\blue42;\red255\green255\blue255;\red162\green70\blue22;
+}
+{\*\expandedcolortbl;;\cssrgb\c23529\c23137\c21569;\cssrgb\c100000\c100000\c100000;\cssrgb\c70196\c35294\c10588;
+}
+{\info
+{\author Elisabeth Robson}}\margl1440\margr1440\vieww19520\viewh25200\viewkind0
+\deftab720
+\pard\pardeftab720\sl920\partightenfactor0
+
+\f0\fs72 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Audience Question\
+\pard\pardeftab720\partightenfactor0
+
+\fs36 \cf2 \cb1 
+\f1\b \cb3 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f2\b0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {{\NeXTGraphic Pasted Graphic.jpg \width720 \height720 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}
+\f1\b\fs36 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \
+\pard\pardeftab720\sa400\partightenfactor0
+\cf2 I'm still not sure I understand why we need a loop. Couldn't we just draw a new circle on the canvas each time we click? So instead of calling\'a0
+\f3 \cf4 \strokec4 updateDisplay
+\f1 \cf2 \strokec2 , we could call\'a0
+\f3 \cf4 \strokec4 drawCircle
+\f1 \cf2 \strokec2 \'a0in the click handler.
+\f0\b0 \cb1 \
+\pard\pardeftab720\sa400\partightenfactor0
+\cf2 \cb3 To get a circle drawn in the canvas each time you click, we could indeed just call\'a0
+\f4 \cf4 \strokec4 drawCircle
+\f0 \cf2 \strokec2 \'a0from the click handler. However, if we do that, we have no easy way to animate the circles.\cb1 \
+\cb3 Remember that when you draw on the canvas, all you're doing is updating pixels at a certain location. It's not like when you create an element in the page using HTML or SVG. If each circle was its own object, then we could, for example, write a separate function to go through all the circle objects in the canvas and animate them.\cb1 \
+\cb3 But the canvas doesn't work that way. All we're doing when we're drawing on the canvas is manipulating pixels. So to make the circles look like they're moving, we need to redraw them over and over. It really is just like an animated movie made out of individual frames. You've probably seen those old videos showing how the animation studios used to make movies from individual "cells" drawn just a little bit different for each frame of the movie, right? Well, we have to do exactly the same thing to make our circles move.\cb1 \
+\cb3 That means we're creating a new drawing for each frame of the movie. And to create a new drawing, we have to re-draw all the circles in whatever configuration we want them to be in for that frame. By drawing each frame over and over at a fast enough rate, it will look just like a smooth animation does in a movie.\cb1 \
+\cb3 This is a standard animation technique when working with pixels. An alternative way to do this would be to create a separate SVG object for each circle and control each circle with a function that changes the size of the circle objects over time.\cb1 \
+}

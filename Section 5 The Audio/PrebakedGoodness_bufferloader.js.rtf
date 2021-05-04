@@ -1,0 +1,114 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 HelveticaNeue-Italic;
+}
+{\colortbl;\red255\green255\blue255;\red46\green45\blue42;\red255\green255\blue255;\red13\green100\blue126;
+\red162\green70\blue22;\red245\green246\blue249;}
+{\*\expandedcolortbl;;\cssrgb\c23529\c23137\c21569;\cssrgb\c100000\c100000\c100000;\cssrgb\c0\c46667\c56863;
+\cssrgb\c70196\c35294\c10588;\cssrgb\c96863\c97255\c98039;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{none\}}{\leveltext\leveltemplateid1\'00;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+{\info
+{\author Elisabeth Robson}}\margl1440\margr1440\vieww19520\viewh25200\viewkind0
+\deftab720
+\pard\pardeftab720\sl920\partightenfactor0
+
+\f0\fs72 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Prebaked goodness: bufferloader.js\
+\pard\pardeftab720\sa400\partightenfactor0
+
+\fs36 \cf2 Next up is the buffer loader. This is the code that reads the audio data (the sound samples) from the MP3 files and loads the data into the buffer list array we use in "Audio.js" to play the sounds.\cb1 \
+\cb3 We're going to put all the code responsible for loading the sound data into a separate file, "BufferLoader.js". Go ahead and create that file now, copy the code below, and save. You'll then need to add a link to this file in "musicbox.html", just like you did for "Audio.js". Put this link above the link to "Audio.js".\cb1 \
+\pard\pardeftab720\sa400\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://gist.github.com/bethrobson/98c3804eab12a1a23118"}}{\fldrslt \cf4 \cb3 \strokec4 Get the full code for the BufferLoader from GitHub}}\cb3 .\cb1 \
+\pard\pardeftab720\sa400\partightenfactor0
+
+\f1 \cf5 \cb3 \strokec5 BufferLoader
+\f0 \cf2 \strokec2 \'a0is a constructor function, that takes the\'a0
+\f1 \cf5 \strokec5 AudioContext
+\f0 \cf2 \strokec2 \'a0as its first argument, an array of filenames as the second argument, and a callback function as the third argument. We'll use this constructor to create a new\'a0
+\f1 \cf5 \strokec5 BufferLoader
+\f0 \cf2 \strokec2 \'a0object in "musicbox.js" in the next section.\cb1 \
+\pard\pardeftab720\sa400\partightenfactor0
+\cf2 \cb3 The\'a0
+\f1 \cf5 \strokec5 loadBuffer
+\f0 \cf2 \strokec2 \'a0method is what does the bulk of the work, so let's start there. We call\'a0
+\f1 \cf5 \strokec5 loadBuffer
+\f0 \cf2 \strokec2 \'a0from the\'a0
+\f1 \cf5 \strokec5 load
+\f0 \cf2 \strokec2 \'a0function (which we'll call from "musicbox.js") for each sound in the list of files. What gets passed to the\'a0
+\f1 \cf5 \strokec5 loadBuffer
+\f0 \cf2 \strokec2 \'a0method is the URL of the file containing the sound, e.g. "A4.mp3", and the index of that sound in the list. We'll use that index later to make sure we get the sounds added to the buffer list in the correct order.\cb1 \
+\cb3 We're using\'a0
+\f1 \cf5 \strokec5 XMLHttpRequest
+\f0 \cf2 \strokec2 \'a0to get the data from the file. Just like a typical\'a0
+\f1 \cf5 \strokec5 XMLHttpRequest
+\f0 \cf2 \strokec2 \'a0request, we make the object, set a callback (in the\'a0
+\f1 \cf5 \strokec5 onload
+\f0 \cf2 \strokec2 \'a0property) and then call\'a0
+\f1 \cf5 \strokec5 send()
+\f0 \cf2 \strokec2 \'a0to kick off the request.\cb1 \
+\cb3 This part of the application is why you need to run a web server in order to get the Music Box to work correctly.\'a0
+\f1 \cf5 \strokec5 XMLHttpRequest
+\f0 \cf2 \strokec2 \'a0makes a request to access the MP3 file in your file system, and it's the web server that gets the data from the file and sends it to the\'a0
+\f1 \cf5 \strokec5 XMLHttpRequest
+\f0 \cf2 \strokec2 \'a0in the response.\cb1 \
+\cb3 Notice that the\'a0
+\f1 \cf5 \strokec5 responseType
+\f0 \cf2 \strokec2 \'a0we're expecting is "arraybuffer". This is probably different from what you're used to when working with\'a0
+\f1 \cf5 \strokec5 XMLHttpRequest
+\f0 \cf2 \strokec2 \'a0to get JSON or plain text. We use this response type when we're working with binary data. In this example, we're working with MP3 binary data, and even though the "arraybuffer" type is generic (meaning, it can be any kind of binary data), we can rely on the\'a0
+\f1 \cf5 \strokec5 AudioContext
+\f0 \cf2 \strokec2 \'a0to correctly recognize that binary data as MP3.\cb1 \
+\cb3 When the request response is ready, the callback function we define for the\'a0
+\f1 \cf5 \strokec5 request.onload
+\f0 \cf2 \strokec2 \'a0property is called. Here, we call the\'a0
+\f1 \cf5 \strokec5 AudioContext
+\f0 \cf2 \strokec2 's method\'a0
+\f1 \cf5 \strokec5 decodeAudioData
+\f0 \cf2 \strokec2 \'a0to decode the binary data in the file into a sound the\'a0
+\f1 \cf5 \strokec5 AudioContext
+\f0 \cf2 \strokec2 \'a0can use. The first argument is the binary data in the\'a0
+\f1 \cf5 \strokec5 response
+\f0 \cf2 \strokec2 \'a0and the second argument is a callback function that is called if the decoding is successful.\cb1 \
+\cb3 The callback is called with the sound data passed into the parameter\'a0
+\f1 \cf5 \strokec5 buffer
+\f0 \cf2 \strokec2 . Next, we save this sound into the\'a0
+\f1 \cf5 \strokec5 bufferList
+\f0 \cf2 \strokec2 \'a0array, which will contain all the sounds once the\'a0
+\f1 \cf5 \strokec5 BufferLoader
+\f0 \cf2 \strokec2 \'a0has completed loading the sounds from the files. Notice here that we don't want to just push the sound onto the end of the\'a0
+\f1 \cf5 \strokec5 bufferList
+\f0 \cf2 \strokec2 \'a0array because the sounds might end up in the wrong order, and we want to keep them in the order we specify (when we pass them into the\'a0
+\f1 \cf5 \strokec5 BufferLoader
+\f0 \cf2 \strokec2 \'a0in the\'a0
+\f1 \cf5 \strokec5 urlList
+\f0 \cf2 \strokec2 ). Remember that making a XMLHttpRequest is\'a0
+\f2\i asynchronous
+\f0\i0 \'a0so the sounds could be loaded out of order. Since we passed in the index where this sound needs to go in the\'a0
+\f1 \cf5 \strokec5 bufferList
+\f0 \cf2 \strokec2 \'a0we can use that to put it in the right spot.\cb1 \
+\cb3 We're keeping track of how many sounds we've loaded with\'a0
+\f1 \cf5 \strokec5 loadCount
+\f0 \cf2 \strokec2 . Once this count is the same as the length of the original array of sounds we passed in, we know we've loaded all the sounds, and we can then call the callback function we stored in the\'a0
+\f1 \cf5 \strokec5 onload
+\f0 \cf2 \strokec2 \'a0property of the\'a0
+\f1 \cf5 \strokec5 BufferLoader
+\f0 \cf2 \strokec2 \'a0object, and pass in the fully loaded array of sounds,\'a0
+\f1 \cf5 \strokec5 bufferList
+\f0 \cf2 \strokec2 .\cb1 \
+\cb3 We'll write this callback function in the next section, where we modify "musicbox.js" to make this\'a0
+\f1 \cf5 \strokec5 BufferLoader
+\f0 \cf2 \strokec2 \'a0object and specify the callback function we'll use to kick off the music box once all the sounds are loaded.\cb1 \
+\cb3 By the way, if you need a refresher on\'a0
+\f1 \cf5 \strokec5 XMLHttpRequest
+\f0 \cf2 \strokec2 , we have a whole chapter on this topic in\'a0{\field{\*\fldinst{HYPERLINK "http://www.wickedlysmart.com/head-first-html5/"}}{\fldrslt \cf4 \strokec4 Head First HTML5 Programming}}.\cb1 \
+\cb3 Hang in there! Just a couple more changes and then you'll be ready to test your music box project.\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs48 \cf2 \cb3 Resources for this lecture\cb1 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0
+\fs40 \cf4 \cb6 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		{\field{\*\fldinst{HYPERLINK "javascript:void(0)"}}{\fldrslt \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 BufferLoader.js}}\cf2 \cb1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \
+}
